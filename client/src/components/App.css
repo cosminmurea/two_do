@@ -1,0 +1,55 @@
+:root {
+    --primaryBgColor: #272932;
+    --secondaryBgColor: #345b72;
+    --primaryTextColor: #ee6352;
+    --secondaryTextColor: #f7fff7;
+    --tertiaryTextColor: #28afb0;
+    --shadowColor: rgba(24, 24, 24, 0.7);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Arvo, serif;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    height: 0;
+    background-color: var(--primaryBgColor);
+    color: var(--secondaryTextColor);
+}
+
+input:focus {
+    outline: none;
+}
+
+.contentContainer {
+    height: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 1.2em;
+    margin: auto;
+}
+
+.mainHeader {
+    color: var(--primaryTextColor);
+    font-size: 3.5em;
+    text-shadow: .2em .2em .2em var(--shadowColor);
+    margin: 1.5em 0 .5em 0;
+}
+
+.subHeader {
+    font-size: 2em;
+    text-shadow: .3em .3em .3em var(--shadowColor);
+    margin-bottom: 2em;
+}

@@ -1,0 +1,47 @@
+.toDoForm {
+    width: 100%;
+}
+
+.inputLabel {
+    display: inline-block;
+    font-size: 1.7em;
+    margin-bottom: 1.2em;
+}
+
+.formInput {
+    width: 100%;
+    color: var(--secondaryTextColor);
+    font-size: 1.5em;
+    background: transparent;
+    box-shadow: .2em .2em .2em var(--shadowColor);
+    border: 2px solid var(--secondaryBgColor);
+    padding: .4em;
+    margin-bottom: 1.2em;
+}
+
+.submitButton {
+    width: 80%;
+    color: var(--secondaryTextColor);
+    font-size: 1.3em;
+    background: transparent;
+    text-shadow: .2em .2em .2em var(--shadowColor);
+    box-shadow: .2em .2em .2em var(--shadowColor);
+    border: 2px solid var(--secondaryBgColor);
+    padding: .5em 0;
+    margin-bottom: 2.5em;
+    transition: .3s ease-out;
+}
+
+.submitButton:focus,
+.submitButton:hover {
+    background-color: var(--secondaryBgColor);
+}
+
+.separatorSpan {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background-color: var(--primaryTextColor);
+    box-shadow: .2em .2em .2em var(--shadowColor);
+    margin-bottom: 4em;
+}

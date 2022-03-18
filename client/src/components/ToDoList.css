@@ -1,0 +1,11 @@
+
+.toDoListHeader {
+    text-shadow: .2em .2em .2em var(--shadowColor);
+    border-bottom: 2px solid var(--tertiaryTextColor);
+    padding-bottom: .4em;
+    margin-bottom: 2em;
+}
+
+.toDoList {
+    width: 100%;
+}
