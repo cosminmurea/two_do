@@ -4,7 +4,7 @@ import './ToDoList.css'
 
 function ToDoList(props) {
     const taskListItems = props.tasks.map(task => (
-        <ToDo key={task.id} id={task.id} name={task.name} />
+        <ToDo key={task.task_id} id={task.task_id} name={task.task_description} />
     ))
 
     return (
