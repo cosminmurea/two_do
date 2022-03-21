@@ -6,23 +6,25 @@ import './App.css'
 function App() {
     const [tasks, setTasks] = useState([])
 
-    const fetchString = () => {
-        fetch('http://localhost:5000/tasks')
-            .then((response) => response.json())
-            .then((response) => {
-                setTasks(response)
-            })
+    const getTasks = async () => {
+        try {
+            const response = await fetch('/tasks')
+            const jsonData = await response.json()
+            setTasks(jsonData)
+        } catch (error) {
+            console.error(error.message)
+        }
     }
 
     useEffect(() => {
-        fetchString()
+        getTasks()
     }, [])
 
     return (
         <div className='contentContainer'>
             <h1 className='mainHeader'>twoDo</h1>
             <h2 className='subHeader'>Stay Organized!</h2>
-            <ToDoForm updateData={fetchString} />
+            <ToDoForm updateData={getTasks} />
             <ToDoList tasks={tasks} />
         </div>
     )

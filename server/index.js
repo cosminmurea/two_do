@@ -1,18 +1,16 @@
 const express = require('express')
 const cors = require('cors')
-const db = require('./twoDoDB')
+const tasksRouter = require('./routes/tasksRouter')
 
 const app = express()
 
-const port = 5000
+const port = process.env.SERVER_PORT || 5000
 
 app.use(cors())
 
 app.use(express.json())
 
-app.get('/tasks', db.getTasks)
-
-app.post('/tasks', db.createTask)
+app.use(tasksRouter)
 
 app.listen(port, () => {
     console.log(`Listening on port: ${port}`)

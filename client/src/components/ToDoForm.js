@@ -8,26 +8,30 @@ function ToDoForm(props) {
         setDescription(event.target.value)
     }
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
-        const fetchOptions = {
-            method: 'POST',
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({ description: description })
+        try {
+            const fetchOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ description: description })
+            }
+            const response = await fetch('/tasks', fetchOptions)
+            const jsonData = await response.json()
+            console.log(jsonData.task_id)
+            props.updateData()
+            setDescription('')
+        } catch (error) {
+            console.error(error.message)
         }
-        fetch('http://localhost:5000/tasks', fetchOptions)
-            .then(response => response.json())
-            .then(props.updateData)
-            .then(setDescription(''))
-            .catch(error => console.error(error))
     }
 
     return (
         <form className='toDoForm' onSubmit={handleSubmit}>
             <span className='separatorSpan'></span>
-            <label className='inputLabel' htmlFor='addToDoInput'>
+            <label className='inputLabel' htmlFor='toDoDescription'>
                 What needs to be done?
             </label>
             <input
