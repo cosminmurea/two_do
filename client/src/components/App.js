@@ -25,7 +25,7 @@ function App() {
             <h1 className='mainHeader'>twoDo</h1>
             <h2 className='subHeader'>Stay Organized!</h2>
             <ToDoForm updateData={getTasks} />
-            <ToDoList tasks={tasks} />
+            <ToDoList tasks={tasks} updateData={getTasks} />
         </div>
     )
 }

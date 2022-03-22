@@ -45,11 +45,24 @@ const getTaskById = async (request, response) => {
 const updateTaskById = async (request, response) => {
     try {
         const updateQuery = 'UPDATE tasks SET task_description = $1 WHERE task_id = $2;'
-        const taskDescription = request.body.description
         const taskId = request.params.id
+        const taskDescription = request.body.description
         const updateParams = [taskDescription, taskId]
         const updateTask = await pool.query(updateQuery, updateParams)
-        response.json('Task Updated!')
+        response.json('Task Description Updated!')
+    } catch (error) {
+        console.error(error.message)
+    }
+}
+
+const updateTaskStatusById = async (request, response) => {
+    try {
+        const updateStatusQuery = 'UPDATE tasks SET is_completed = $1 WHERE task_id = $2;'
+        const taskId = request.params.id
+        const taskStatus = !request.body.taskStatus
+        const updateStatusParams = [taskStatus, taskId]
+        const updateTaskStatus = await pool.query(updateStatusQuery, updateStatusParams)
+        response.json(`Task Marked as ${taskStatus ? 'Complete' : 'Incomplete'}!`)
     } catch (error) {
         console.error(error.message)
     }
@@ -72,5 +85,6 @@ module.exports = {
     createTask,
     getTaskById,
     updateTaskById,
+    updateTaskStatusById,
     deleteTaskById
 }

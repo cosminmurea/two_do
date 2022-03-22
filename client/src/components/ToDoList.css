@@ -9,3 +9,60 @@
 .toDoList {
     width: 100%;
 }
+
+.toDoCard {
+    list-style-type: none;
+    box-shadow: .2em .2em .2em var(--shadowColor);
+    border: 2px solid var(--secondaryBgColor);
+    padding: 1.1em;
+    margin-bottom: 1.5em;
+}
+
+.toDoText {
+    font-size: 1.4em;
+    text-align: justify;
+    margin: .8em 0;
+}
+
+.toDoButtons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.toDoDoneButton,
+.toDoEditButton,
+.toDoDeleteButton {
+    height: 90%;
+    width: 100%;
+    font-size: 1.1em;
+    color: var(--secondaryTextColor);
+    background: transparent;
+    text-shadow: .2em .2em .2em var(--shadowColor);
+    box-shadow: .2em .2em .2em var(--shadowColor);
+    border: 2px solid var(--secondaryBgColor);
+    padding: .6em;
+    margin: .3em;
+    transition: .3s ease-out;
+}
+
+.toDoDoneButton:hover,
+.toDoEditButton:hover,
+.toDoDeleteButton:hover {
+    background-color: var(--secondaryBgColor);
+}
+
+.taskComplete {
+    color: slategray;
+}
+
+.buttonDisabled {
+    color: slategray;
+    border-color: slategray;
+}
+
+.buttonDisabled:hover {
+    background-color: transparent;
+}

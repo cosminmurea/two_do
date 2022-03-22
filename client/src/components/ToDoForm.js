@@ -10,13 +10,19 @@ function ToDoForm(props) {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+
+        if (description.trim().length === 0) {
+            alert('All Fields are Required!!')
+            return
+        }
+
         try {
             const fetchOptions = {
                 method: 'POST',
                 headers: {
                     'Content-type': 'application/json'
                 },
-                body: JSON.stringify({ description: description })
+                body: JSON.stringify({ description: description.trim() })
             }
             const response = await fetch('/tasks', fetchOptions)
             const jsonData = await response.json()
