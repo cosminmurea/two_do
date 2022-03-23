@@ -56,6 +56,7 @@
 
 .taskComplete {
     color: slategray;
+    text-decoration: line-through;
 }
 
 .buttonDisabled {
@@ -65,4 +66,34 @@
 
 .buttonDisabled:hover {
     background-color: transparent;
+}
+
+.modalInput {
+    width: 100%;
+    color: var(--secondaryTextColor);
+    background: transparent;
+    font-size: 1.5em;
+    border: 2px solid var(--secondaryBgColor);
+    border-right: none;
+    border-left: none;
+    padding: .4em;
+    margin-bottom: 1.2em;
+}
+
+.modalButton {
+    display: block;
+    width: 80%;
+    color: var(--secondaryTextColor);
+    font-size: 1.3em;
+    background: transparent;
+    border: 2px solid var(--secondaryBgColor);
+    margin: auto;
+    margin-bottom: .5em;
+    padding: .5em 0;
+    transition: .3s ease-out;
+}
+
+.modalButton:focus,
+.modalButton:hover {
+    background-color: var(--secondaryBgColor);
 }

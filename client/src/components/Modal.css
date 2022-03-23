@@ -1,0 +1,23 @@
+
+.modalContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .6);
+    padding: 0 1.2em;
+}
+
+.modalCard {
+    width: 100%;
+    max-width: 800px;
+    background-color: var(--primaryBgColor);
+    box-shadow: .2em .2em .2em var(--shadowColor);
+    border: 2px solid var(--secondaryBgColor);
+    padding: 1.5em 0;
+}

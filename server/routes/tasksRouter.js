@@ -1,6 +1,8 @@
 const router = require('express').Router()
 const queries = require('../database')
 
+// Test endpoints using jest + supertest
+
 router.get('/tasks', queries.getTasks)
 
 router.post('/tasks', queries.createTask)
