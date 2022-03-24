@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import ToDoForm from './ToDoForm'
-import ToDoList from './ToDoList'
+import ToDoForm from './ToDoForm/ToDoForm'
+import ToDoList from './ToDoList/ToDoList'
 import './App.css'
 
 function App() {

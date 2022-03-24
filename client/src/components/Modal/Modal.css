@@ -1,0 +1,70 @@
+
+.modalContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, .6);
+    padding: 0 1.2em;
+}
+
+.modalCard {
+    width: 100%;
+    max-width: 800px;
+    background-color: var(--primaryBgColor);
+    box-shadow: .2em .2em .2em var(--shadowColor);
+    border: 2px solid var(--secondaryBgColor);
+    padding: 1.5em 0;
+}
+
+.modalButton {
+    display: block;
+    width: 80%;
+    color: var(--secondaryTextColor);
+    font-size: 1.3em;
+    background: transparent;
+    border: 2px solid var(--secondaryBgColor);
+    margin: auto;
+    margin-bottom: .5em;
+    padding: .5em 0;
+    transition: .3s ease-out;
+}
+
+.modalButton:focus,
+.modalButton:hover {
+    background-color: var(--secondaryBgColor);
+}
+
+.modalCardHeader {
+    font-size: 1.5em;
+    font-weight: 500;
+    text-align: justify;
+    border: 2px solid var(--secondaryBgColor);
+    border-left: none;
+    border-right: none;
+    padding: .7em;
+    margin: 1em 0;
+}
+
+.modalCardSubHeader {
+    font-size: 1.3em;
+    font-weight: 500;
+    margin: 1em 0;
+}
+
+.modalFormInput {
+    width: 100%;
+    color: var(--secondaryTextColor);
+    background: transparent;
+    font-size: 1.5em;
+    border: 2px solid var(--secondaryBgColor);
+    border-right: none;
+    border-left: none;
+    padding: .4em;
+    margin-bottom: 1.2em;
+}
