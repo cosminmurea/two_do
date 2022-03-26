@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import Theme from './Theme'
 import ToDoForm from './ToDoForm/ToDoForm'
 import ToDoList from './ToDoList/ToDoList'
 import './App.css'
@@ -21,12 +22,14 @@ function App() {
     }, [])
 
     return (
-        <div className='contentContainer'>
-            <h1 className='mainHeader'>twoDo</h1>
-            <h2 className='subHeader'>Stay Organized!</h2>
-            <ToDoForm updateData={getTasks} />
-            <ToDoList tasks={tasks} updateData={getTasks} />
-        </div>
+        <Theme>
+            <div className='contentContainer'>
+                <h1 className='mainHeader'>twoDo</h1>
+                <h2 className='subHeader'>Stay Organized!</h2>
+                <ToDoForm updateData={getTasks} />
+                <ToDoList tasks={tasks} updateData={getTasks} />
+            </div>
+        </Theme>
     )
 }
 

@@ -11,15 +11,35 @@
     align-items: center;
     background-color: rgba(0, 0, 0, .6);
     padding: 0 1.2em;
+    transition: all .25s ease-in-out;
+}
+
+.modalContainer.modalHidden {
+    z-index: -1;
+    opacity: 0;
+    transform: scale(0);
+}
+
+.modalContainer.modalVisible {
+    z-index: 10;
+    opacity: 1;
+    transform: scale(1);
 }
 
 .modalCard {
     width: 100%;
     max-width: 800px;
+    max-height: 90%;
+    overflow-wrap: break-word;
+    overflow-y: scroll;
     background-color: var(--primaryBgColor);
     box-shadow: .2em .2em .2em var(--shadowColor);
     border: 2px solid var(--secondaryBgColor);
     padding: 1.5em 0;
+}
+
+.modalCard::-webkit-scrollbar {
+    display: none;
 }
 
 .modalButton {
@@ -38,23 +58,6 @@
 .modalButton:focus,
 .modalButton:hover {
     background-color: var(--secondaryBgColor);
-}
-
-.modalCardHeader {
-    font-size: 1.5em;
-    font-weight: 500;
-    text-align: justify;
-    border: 2px solid var(--secondaryBgColor);
-    border-left: none;
-    border-right: none;
-    padding: .7em;
-    margin: 1em 0;
-}
-
-.modalCardSubHeader {
-    font-size: 1.3em;
-    font-weight: 500;
-    margin: 1em 0;
 }
 
 .modalFormInput {

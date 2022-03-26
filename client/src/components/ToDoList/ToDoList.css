@@ -12,6 +12,7 @@
 
 .toDoCard {
     list-style-type: none;
+    overflow-wrap: break-word;
     box-shadow: .2em .2em .2em var(--shadowColor);
     border: 2px solid var(--secondaryBgColor);
     padding: 1.1em;

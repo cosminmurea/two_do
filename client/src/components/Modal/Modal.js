@@ -2,12 +2,8 @@ import React from 'react'
 import './Modal.css'
 
 function Modal(props) {
-    if (!props.show) {
-        return null
-    }
-
     return (
-        <div className='modalContainer'>
+        <div className={props.show ? 'modalContainer modalVisible' : 'modalContainer modalHidden'}>
             <div className='modalCard'>
                 {props.children}
             </div>
