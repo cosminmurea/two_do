@@ -31,13 +31,19 @@ function ToDoList(props) {
     }
 
     const updateTask = async (taskId) => {
+
+        if (description.trim().length === 0) {
+            alert('All Fields are Required!!')
+            return
+        }
+
         try {
             const fetchOptions = {
                 method: 'PUT',
                 headers: {
                     'Content-type': 'application/json'
                 },
-                body: JSON.stringify({ description: description })
+                body: JSON.stringify({ description: description.trim() })
             }
             const response = await fetch(`/tasks/${taskId}`, fetchOptions)
             const jsonData = await response.json()
