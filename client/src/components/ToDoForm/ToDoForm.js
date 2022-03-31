@@ -1,5 +1,14 @@
 import React, { useState } from 'react'
-import './ToDoForm.css'
+import styled from 'styled-components'
+import {
+    Label,
+    Input,
+    Button
+} from '../Theme'
+
+const Form = styled.form`
+    width: 100%;
+`
 
 function ToDoForm(props) {
     const [description, setDescription] = useState('')
@@ -35,13 +44,15 @@ function ToDoForm(props) {
     }
 
     return (
-        <form className='toDoForm' onSubmit={handleSubmit}>
-            <span className='separatorSpan'></span>
-            <label className='inputLabel' htmlFor='toDoDescription'>
+        <Form
+            onSubmit={handleSubmit}
+        >
+            <Label
+                htmlFor='toDoDescription'
+            >
                 What needs to be done?
-            </label>
-            <input
-                className='formInput'
+            </Label>
+            <Input
                 id='toDoDescription'
                 type='text'
                 name='description'
@@ -50,11 +61,12 @@ function ToDoForm(props) {
                 placeholder='Add a new Task'
                 onChange={handleChange}
             />
-            <button className='submitButton' type='submit'>
-                ADD
-            </button>
-            <span className='separatorSpan'></span>
-        </form>
+            <Button
+                type='submit'
+            >
+                Add
+            </Button>
+        </Form>
     )
 }
 

@@ -1,39 +1,47 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Modal, ModalButton } from './Modal'
+import Modal from './Modal'
+import { ModalButton } from '../Theme'
 
-const ModalCardContent = styled.p`
-    font-size: ${props => props.secondary ? '1.4em' : '1.5em'};
+const ModalContent = styled.p`
+    font-size: ${props => props.secondary ? '1.3rem' : '1.5rem'};
     text-align: ${props => props.secondary ? 'center' : 'justify'};
+    box-shadow: ${props => props.secondary ? 'none' : `.2em .2em .2em ${props.theme.colors.shadowColor}`};
     border: ${props => props.secondary ? 'none' : `2px solid ${props.theme.colors.borderColor}`};
     border-left: none;
     border-right: none;
-    padding: .5em;
-    margin: ${props => props.secondary ? '.3em 0' : '1em 0'};
+    padding: ${props => props.secondary ? '0 .8rem' : '.8rem'};
+    margin-top: ${props => props.secondary ? '0' : '3.5rem'};
+    margin-bottom: ${props => props.secondary ? '1.5rem' : '2.5rem'};
     .statusSpan {
         color: ${props => props.theme.colors.textPrimary};
     }
 `
 
 function ModalCard(props) {
-    let createdAt = props.task.created_at.replace('T', ' ').replace('-', '/').replace('-', '/')
+    let createdAt = props.task.created_at.replace('T', ' ').replaceAll('-', '/')
     createdAt = createdAt.substring(0, createdAt.length - 5)
 
     return (
         <Modal show={props.openModalId === props.task.task_id}>
-            <ModalCardContent>
+            <ModalContent>
                 {props.task.task_description}
-            </ModalCardContent>
-            <ModalCardContent secondary>
+            </ModalContent>
+            <ModalContent secondary>
                 Task Id: {props.task.task_id}
-            </ModalCardContent>
-            <ModalCardContent secondary>
+            </ModalContent>
+            <ModalContent secondary>
                 Task Status: <span className='statusSpan'>{props.task.is_completed ? 'Complete' : 'Incomplete'}</span>
-            </ModalCardContent>
-            <ModalCardContent secondary>
+            </ModalContent>
+            <ModalContent secondary>
                 Created At: {createdAt}
-            </ModalCardContent>
-            <ModalButton onClick={props.closeModal}>Close</ModalButton>
+            </ModalContent>
+            <ModalButton
+                modal
+                onClick={props.closeModal}
+            >
+                Close
+            </ModalButton>
         </Modal>
     )
 }

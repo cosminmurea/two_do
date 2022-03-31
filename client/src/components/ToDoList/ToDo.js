@@ -1,42 +1,84 @@
 import React from 'react'
+import styled from 'styled-components'
+import { FlexContainer, Button } from '../Theme'
+
+const ListItem = styled.li`
+    ${FlexContainer}
+    align-items: unset;
+    overflow-wrap: break-word;
+    box-shadow: .2em .2em .2em ${props => props.theme.colors.shadowColor};
+    border: 2px solid ${props => props.theme.colors.borderColor};
+    padding: 0 1.2rem;
+    margin-bottom: 2.5rem;
+`
+
+const ListItemContent = styled.p`
+    font-size: 1.5rem;
+    text-align: justify;
+    margin: 1.5rem 0;
+    &.taskComplete {
+        color: slategray;
+        text-decoration: line-through;
+    }
+`
+
+const ListButtonContainer = styled.div`
+    ${FlexContainer}
+    padding: 0;
+    > * {
+        :last-child {
+            margin-bottom: 1.5rem;
+        }
+    }
+`
+
+const ListButton = styled(Button)`
+    width: 100%;
+    font-size: 1.2rem;
+    margin-bottom: .7rem;
+    &.buttonDisabled,
+    &.buttonDisabled:hover {
+        color: slategray;
+        background-color: transparent;
+        border-color: slategray;
+    }
+`
 
 function ToDo(props) {
     return (
-        <li className='toDoCard' id={props.task.task_id}>
-            <p className={props.task.is_completed ? 'toDoText taskComplete' : 'toDoText'}>{props.task.task_description}</p>
-            <div className='toDoButtons'>
-                <button
-                    className='toDoDoneButton'
+        <ListItem id={props.task.task_id}>
+            <ListItemContent className={props.task.is_completed ? 'taskComplete' : ''}>{props.task.task_description}</ListItemContent>
+            <ListButtonContainer>
+                <ListButton
                     type='button'
                     onClick={() => props.updateTaskStatus(props.task.task_id, props.task.is_completed)}
                 >
                     {props.task.is_completed ? 'UNDO' : 'DONE'}
-                </button>
-                <button
-                    className={props.task.is_completed ? 'toDoDetailsButton buttonDisabled' : 'toDoDetailsButton'}
+                </ListButton>
+                <ListButton
+                    className={props.task.is_completed ? 'buttonDisabled' : ''}
                     type='button'
                     disabled={props.task.is_completed}
                     onClick={() => props.openModalCard(props.task.task_id)}
                 >
                     DETAILS
-                </button>
-                <button
-                    className={props.task.is_completed ? 'toDoEditButton buttonDisabled' : 'toDoEditButton'}
+                </ListButton>
+                <ListButton
+                    className={props.task.is_completed ? 'buttonDisabled' : ''}
                     type='button'
                     disabled={props.task.is_completed}
                     onClick={() => props.openModalForm(props.task.task_id)}
                 >
                     EDIT
-                </button>
-                <button
-                    className='toDoDeleteButton'
+                </ListButton>
+                <ListButton
                     type='button'
                     onClick={() => props.deleteTask(props.task.task_id)}
                 >
                     DELETE
-                </button>
-            </div>
-        </li>
+                </ListButton>
+            </ListButtonContainer>
+        </ListItem>
     )
 }
 
