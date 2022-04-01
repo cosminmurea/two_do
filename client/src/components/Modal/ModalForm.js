@@ -4,7 +4,6 @@ import Modal from './Modal'
 import { Label, Input, ModalButton } from '../Theme'
 
 const ModalLabel = styled(Label)`
-    font-size: 1.5rem;
     margin-top: 3.5rem;
     margin-bottom: 2.5rem;
 `

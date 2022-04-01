@@ -11,6 +11,12 @@ const theme = {
         extraColor: '#28afb0'
     },
     fonts: ['Arvo', 'sans-serif'],
+    fontSizes: {
+        header: '3.5rem',
+        label: '2rem',
+        content: '1.5rem',
+        button: '1.3rem'
+    }
 }
 
 /*
@@ -26,6 +32,9 @@ const GlobalStyles = createGlobalStyle`
     }
     html {
         scroll-behavior: smooth;
+    }
+    html::-webkit-scrollbar {
+        display: none;
     }
     body {
         background-color: ${props => props.theme.colors.backgroundPrimary};
@@ -53,12 +62,13 @@ const FlexContainer = css`
 
 const Header = styled.h2`
     color: ${props => props.theme.colors.textSecondary};
+    font-size: ${props => props.theme.fontSizes.header};
     text-shadow: .2em .2em .2em ${props => props.theme.colors.shadowColor};
 `
 
 const Label = styled.label`
     display: block;
-    font-size: 1.7rem;
+    font-size: ${props => props.theme.fontSizes.label};
     text-shadow: .2em .2em .2em ${props => props.theme.colors.shadowColor};
     margin-top: ${props => props.modal ? '1.5rem' : '0'};
     margin-bottom: 1.5rem;
@@ -67,7 +77,7 @@ const Label = styled.label`
 const Input = styled.input`
     width: 100%;
     color: ${props => props.theme.colors.textSecondary};
-    font-size: 1.5rem;
+    font-size: ${props => props.theme.fontSizes.content};
     background: transparent;
     box-shadow: .2em .2em .2em ${props => props.theme.colors.shadowColor};
     border: 2px solid ${props => props.theme.colors.borderColor};
@@ -78,9 +88,12 @@ const Input = styled.input`
 `
 
 const Button = styled.button`
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
     width: 80%;
     color: ${props => props.theme.colors.textSecondary};
-    font-size: 1.3rem;
+    font-size: ${props => props.theme.fontSizes.button};
     text-transform: uppercase;
     background: transparent;
     text-shadow: .2em .2em .2em ${props => props.theme.colors.shadowColor};
@@ -88,9 +101,21 @@ const Button = styled.button`
     border: 2px solid ${props => props.theme.colors.borderColor};
     padding: .6rem 0;
     margin-bottom: ${props => props.modal ? '1rem' : '2.5rem'};
-    transition: .3s ease-out;
-    &:hover, &:focus {
-        background: ${props => props.theme.colors.borderColor}
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 130%;
+        height: 110%;
+        background-color: ${props => props.theme.colors.borderColor};
+        transform: translate(-110%, 0);
+        transition: .25s ease-out;
+    }
+    &:hover::before,
+    &:focus::before {
+        transform: translate(-5%, 0) skew(-15deg);
     }
 `
 

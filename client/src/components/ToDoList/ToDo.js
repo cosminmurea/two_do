@@ -13,7 +13,7 @@ const ListItem = styled.li`
 `
 
 const ListItemContent = styled.p`
-    font-size: 1.5rem;
+    font-size: ${props => props.theme.fontSizes.content};
     text-align: justify;
     margin: 1.5rem 0;
     &.taskComplete {
@@ -34,10 +34,11 @@ const ListButtonContainer = styled.div`
 
 const ListButton = styled(Button)`
     width: 100%;
-    font-size: 1.2rem;
     margin-bottom: .7rem;
     &.buttonDisabled,
-    &.buttonDisabled:hover {
+    &.buttonDisabled:hover,
+    &.buttonDisabled:focus,
+    &.buttonDisabled::before {
         color: slategray;
         background-color: transparent;
         border-color: slategray;

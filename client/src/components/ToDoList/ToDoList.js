@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import ToDo from './ToDo'
 import ModalForm from '../Modal/ModalForm'
 import ModalCard from '../Modal/ModalCard'
-import { FlexContainer, Header } from '../Theme'
+import { FlexContainer, Label } from '../Theme'
 
 const ListContainer = styled.ul`
     ${FlexContainer}
@@ -11,8 +11,7 @@ const ListContainer = styled.ul`
     padding: 0;
 `
 
-const ListHeader = styled(Header)`
-    width: 70%;
+const ListHeader = styled(Label)`
     border-bottom: 2px solid ${props => props.theme.colors.extraColor};
     padding-bottom: .5rem;
     margin-bottom: 2.5rem;
@@ -25,19 +24,23 @@ function ToDoList(props) {
 
     const openModalCard = (modalCardId) => {
         setOpenModalCardId(modalCardId)
+        document.body.style.overflow = 'hidden'
     }
 
     const closeModalCard = () => {
         setOpenModalCardId(null)
+        document.body.style.overflow = 'unset'
     }
 
     const openModalForm = (modalFormId) => {
         setOpenModalFormId(modalFormId)
+        document.body.style.overflow = 'hidden'
     }
 
     const closeModalForm = () => {
         setOpenModalFormId(null)
         setDescription('')
+        document.body.style.overflow = 'unset'
     }
 
     const handleChange = (event) => {
@@ -125,7 +128,8 @@ function ToDoList(props) {
                 closeModal={closeModalForm}
             />
         </React.Fragment>
-    ))
+    )
+    )
 
     return (
         <ListContainer>

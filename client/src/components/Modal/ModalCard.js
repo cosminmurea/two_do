@@ -4,7 +4,7 @@ import Modal from './Modal'
 import { ModalButton } from '../Theme'
 
 const ModalContent = styled.p`
-    font-size: ${props => props.secondary ? '1.3rem' : '1.5rem'};
+    font-size: ${props => props.theme.fontSizes.content};
     text-align: ${props => props.secondary ? 'center' : 'justify'};
     box-shadow: ${props => props.secondary ? 'none' : `.2em .2em .2em ${props.theme.colors.shadowColor}`};
     border: ${props => props.secondary ? 'none' : `2px solid ${props.theme.colors.borderColor}`};

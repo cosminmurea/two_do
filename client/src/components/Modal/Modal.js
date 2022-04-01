@@ -23,9 +23,6 @@ const ModalContainer = styled.div`
     background-color: ${props => props.theme.colors.backgroundPrimary};
     box-shadow: .2em .2em .2em ${props => props.theme.colors.shadowColor};
     border: 2px solid ${props => props.theme.colors.borderColor};
-    &::-webkit-scrollbar {
-        display: none;
-    }
 `
 
 function Modal(props) {

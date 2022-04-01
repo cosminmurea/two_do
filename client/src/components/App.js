@@ -5,7 +5,8 @@ import ToDoList from './ToDoList/ToDoList'
 import {
     Theme,
     FlexContainer,
-    Header
+    Header,
+    Label
 } from './Theme'
 
 const AppContainer = styled.div`
@@ -15,13 +16,11 @@ const AppContainer = styled.div`
 
 const MainHeader = styled(Header)`
     color: ${props => props.theme.colors.textPrimary};
-    font-size: 3.5rem;
     margin-top: 2.5rem;
     margin-bottom: .5rem;
 `
 
-const SubHeader = styled(Header)`
-    font-size: 2rem;
+const SubHeader = styled(Label)`
     margin-bottom: 2.5rem;
 `
 
@@ -29,6 +28,7 @@ const SeparatorSpan = styled.span`
     display: block;
     height: 2px;
     width: 100%;
+    max-width: 800px;
     background-color: ${props => props.theme.colors.textPrimary};
     box-shadow: .2em .2em .2em ${props => props.theme.colors.shadowColor};
     margin-bottom: 2.5rem;
