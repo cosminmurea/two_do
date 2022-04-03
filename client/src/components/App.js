@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import ToDoForm from './ToDoForm/ToDoForm'
 import ToDoList from './ToDoList/ToDoList'
+import Footer from './Footer'
 import {
     Theme,
     FlexContainer,
@@ -61,6 +62,7 @@ function App() {
                 <SeparatorSpan></SeparatorSpan>
                 <ToDoList tasks={tasks} updateData={getTasks} />
             </AppContainer>
+            <Footer />
         </Theme>
     )
 }

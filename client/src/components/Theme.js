@@ -29,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
         text-decoration: none;
         padding: 0;
         margin: 0;
+        -webkit-tap-highlight-color: transparent;
     }
     html {
         scroll-behavior: smooth;
@@ -42,6 +43,11 @@ const GlobalStyles = createGlobalStyle`
     }
     input:focus {
         outline: none;
+    }
+    #root {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
     }
 `
 
@@ -125,6 +131,24 @@ const ModalButton = styled(Button)`
     }
 `
 
+const SocialMediaIcons = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    gap: 1rem;
+    > a {
+        color: ${props => props.theme.colors.textSecondary};
+        text-shadow: .2em .2em .2em ${props => props.theme.colors.shadowColor};
+        transition: .25s ease-out;
+    }
+    > a:hover,
+    > a:focus {
+        color: ${props => props.theme.colors.extraColor};
+    }
+`
+
 const Theme = (props) => {
     return (
         <ThemeProvider theme={theme}>
@@ -141,5 +165,6 @@ export {
     Label,
     Input,
     Button,
-    ModalButton
+    ModalButton,
+    SocialMediaIcons
 }

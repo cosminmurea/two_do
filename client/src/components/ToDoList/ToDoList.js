@@ -1,12 +1,17 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
+import { Slide } from 'react-awesome-reveal'
 import ToDo from './ToDo'
 import ModalForm from '../Modal/ModalForm'
 import ModalCard from '../Modal/ModalCard'
-import { FlexContainer, Label } from '../Theme'
+import {
+    FlexContainer,
+    Label
+} from '../Theme'
 
 const ListContainer = styled.ul`
     ${FlexContainer}
+    justify-content: flex-start;
     list-style-type: none;
     padding: 0;
 `
@@ -15,6 +20,10 @@ const ListHeader = styled(Label)`
     border-bottom: 2px solid ${props => props.theme.colors.extraColor};
     padding-bottom: .5rem;
     margin-bottom: 2.5rem;
+`
+
+const ListItemSlide = styled(Slide)`
+    width: 100%;
 `
 
 function ToDoList(props) {
@@ -65,8 +74,8 @@ function ToDoList(props) {
             }
             const response = await fetch(`/tasks/${taskId}`, fetchOptions)
             const jsonData = await response.json()
+            console.log(jsonData)
             props.updateData()
-            alert(jsonData)
             closeModalForm()
         } catch (error) {
             console.error(error.message)
@@ -84,8 +93,8 @@ function ToDoList(props) {
             }
             const response = await fetch(`/tasks/status/${taskId}`, fetchOptions)
             const jsonData = await response.json()
+            console.log(jsonData)
             props.updateData()
-            alert(jsonData)
         } catch (error) {
             console.error(error.message)
         }
@@ -98,8 +107,8 @@ function ToDoList(props) {
             }
             const response = await fetch(`/tasks/${taskId}`, fetchOptions)
             const jsonData = await response.json()
+            console.log(jsonData)
             props.updateData()
-            alert(jsonData)
         } catch (error) {
             console.error(error.message)
         }
@@ -107,13 +116,15 @@ function ToDoList(props) {
 
     const taskListItems = props.tasks.map(task => (
         <React.Fragment key={task.task_id}>
-            <ToDo
-                task={task}
-                updateTaskStatus={updateTaskStatus}
-                openModalForm={openModalForm}
-                openModalCard={openModalCard}
-                deleteTask={deleteTask}
-            />
+            <ListItemSlide triggerOnce fraction={.1} direction={task.task_id % 2 === 0 ? 'right' : 'left'}>
+                <ToDo
+                    task={task}
+                    updateTaskStatus={updateTaskStatus}
+                    openModalForm={openModalForm}
+                    openModalCard={openModalCard}
+                    deleteTask={deleteTask}
+                />
+            </ListItemSlide>
             <ModalCard
                 openModalId={openModalCardId}
                 task={task}
@@ -134,7 +145,7 @@ function ToDoList(props) {
     return (
         <ListContainer>
             <ListHeader>
-                {props.tasks.length} Tasks Total
+                {props.tasks.length} Lorem Lorem
             </ListHeader>
             {taskListItems}
         </ListContainer>

@@ -20,6 +20,7 @@ const ListItemContent = styled.p`
         color: slategray;
         text-decoration: line-through;
     }
+    transition: .3s ease-in-out;
 `
 
 const ListButtonContainer = styled.div`
@@ -35,6 +36,7 @@ const ListButtonContainer = styled.div`
 const ListButton = styled(Button)`
     width: 100%;
     margin-bottom: .7rem;
+    transition: .3s ease-in-out;
     &.buttonDisabled,
     &.buttonDisabled:hover,
     &.buttonDisabled:focus,

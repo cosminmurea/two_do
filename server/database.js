@@ -10,7 +10,7 @@ const pool = new Pool({
 
 const getTasks = async (request, response) => {
     try {
-        const selectQuery = 'SELECT * FROM tasks;'
+        const selectQuery = 'SELECT * FROM tasks ORDER BY task_id ASC;'
         const allTasks = await pool.query(selectQuery)
         response.json(allTasks.rows)
     } catch (error) {
