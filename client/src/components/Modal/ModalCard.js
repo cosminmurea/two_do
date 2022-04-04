@@ -13,7 +13,7 @@ const ModalContent = styled.p`
     padding: ${props => props.secondary ? '0 .8rem' : '.8rem'};
     margin-top: ${props => props.secondary ? '0' : '3.5rem'};
     margin-bottom: ${props => props.secondary ? '1.5rem' : '2.5rem'};
-    .statusSpan {
+    > span {
         color: ${props => props.theme.colors.textPrimary};
     }
 `
@@ -21,6 +21,11 @@ const ModalContent = styled.p`
 function ModalCard(props) {
     let createdAt = props.task.created_at.replace('T', ' ').replaceAll('-', '/')
     createdAt = createdAt.substring(0, createdAt.length - 5)
+
+    const closeModal = () => {
+        props.setOpenModalId(null)
+        document.body.style.overflow = 'unset'
+    }
 
     return (
         <Modal show={props.openModalId === props.task.task_id}>
@@ -31,14 +36,14 @@ function ModalCard(props) {
                 Task Id: {props.task.task_id}
             </ModalContent>
             <ModalContent secondary>
-                Task Status: <span className='statusSpan'>{props.task.is_completed ? 'Complete' : 'Incomplete'}</span>
+                Task Status: <span>{props.task.is_completed ? 'Complete' : 'Incomplete'}</span>
             </ModalContent>
             <ModalContent secondary>
                 Created At: {createdAt}
             </ModalContent>
             <ModalButton
                 modal
-                onClick={props.closeModal}
+                onClick={closeModal}
             >
                 Close
             </ModalButton>

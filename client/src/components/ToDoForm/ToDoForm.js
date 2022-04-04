@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import {
     Label,
     Input,
     Button
 } from '../Theme'
+import useInput from '../../hooks/useInput'
 
 const Form = styled.form`
     width: 100%;
@@ -14,41 +15,48 @@ const Form = styled.form`
 `
 
 function ToDoForm(props) {
-    const [description, setDescription] = useState('')
+    const taskDescription = useInput('')
 
-    const handleChange = (event) => {
-        setDescription(event.target.value)
-    }
-
-    const handleSubmit = async (event) => {
+    const createTask = async (event) => {
         event.preventDefault()
 
-        if (description.trim().length === 0) {
+        if (taskDescription.value.trim().length === 0) {
             alert('All Fields are Required!!')
             return
         }
 
         try {
-            const fetchOptions = {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({ description: description.trim() })
-            }
-            const response = await fetch('/tasks', fetchOptions)
-            const jsonData = await response.json()
-            console.log(jsonData.task_id)
+            await postRequest(`/tasks`, taskDescription.value.trim())
+
             props.updateData()
-            setDescription('')
+
+            taskDescription.reset()
         } catch (error) {
             console.error(error.message)
         }
     }
 
+    const postRequest = async (url, description) => {
+        try {
+            const postOptions = {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ description: description })
+            }
+            const response = await fetch(url, postOptions)
+            const responseData = await response.json()
+            return responseData
+        } catch (error) {
+            console.error(error.message)
+            return undefined
+        }
+    }
+
     return (
         <Form
-            onSubmit={handleSubmit}
+            onSubmit={createTask}
         >
             <Label
                 htmlFor='toDoDescription'
@@ -59,10 +67,10 @@ function ToDoForm(props) {
                 id='toDoDescription'
                 type='text'
                 name='description'
-                value={description}
+                value={taskDescription.value}
                 autoComplete='off'
                 placeholder='Add a new Task'
-                onChange={handleChange}
+                onChange={taskDescription.handleChange}
             />
             <Button
                 type='submit'

@@ -30,7 +30,6 @@ const ListItemSlide = styled(Slide)`
 function ToDoList(props) {
     const [openModalFormId, setOpenModalFormId] = useState(null)
     const [openModalCardId, setOpenModalCardId] = useState(null)
-    const [description, setDescription] = useState('')
     const [deleteCard, setDeleteCard] = useState(null)
 
     const openModalCard = (modalCardId) => {
@@ -38,50 +37,9 @@ function ToDoList(props) {
         document.body.style.overflow = 'hidden'
     }
 
-    const closeModalCard = () => {
-        setOpenModalCardId(null)
-        document.body.style.overflow = 'unset'
-    }
-
     const openModalForm = (modalFormId) => {
         setOpenModalFormId(modalFormId)
         document.body.style.overflow = 'hidden'
-    }
-
-    const closeModalForm = () => {
-        setOpenModalFormId(null)
-        setDescription('')
-        document.body.style.overflow = 'unset'
-    }
-
-    const handleChange = (event) => {
-        setDescription(event.target.value)
-    }
-
-    const updateTask = async (event, taskId) => {
-        event.preventDefault()
-
-        if (description.trim().length === 0) {
-            alert('All Fields are Required!!')
-            return
-        }
-
-        try {
-            const fetchOptions = {
-                method: 'PUT',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({ description: description.trim() })
-            }
-            const response = await fetch(`/tasks/${taskId}`, fetchOptions)
-            const jsonData = await response.json()
-            console.log(jsonData)
-            props.updateData()
-            closeModalForm()
-        } catch (error) {
-            console.error(error.message)
-        }
     }
 
     const updateTaskStatus = async (taskId, taskStatus) => {
@@ -146,16 +104,14 @@ function ToDoList(props) {
             </ListItemSlide>
             <ModalCard
                 openModalId={openModalCardId}
+                setOpenModalId={setOpenModalCardId}
                 task={task}
-                closeModal={closeModalCard}
             />
             <ModalForm
-                openModalId={openModalFormId}
                 task={task}
-                currentDescription={description}
-                handleChange={handleChange}
-                updateTask={updateTask}
-                closeModal={closeModalForm}
+                updateData={props.updateData}
+                openModalId={openModalFormId}
+                setOpenModalId={setOpenModalFormId}
             />
         </React.Fragment>
     )
@@ -164,7 +120,7 @@ function ToDoList(props) {
     return (
         <ListContainer>
             <ListHeader>
-                {props.tasks.length} Lorem Lorem
+                {props.tasks.length} Tasks Total
             </ListHeader>
             {taskListItems}
         </ListContainer>
