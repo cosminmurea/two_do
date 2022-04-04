@@ -4,6 +4,9 @@ import { FlexContainer, Button } from '../Theme'
 
 const ListItem = styled.li`
     ${FlexContainer}
+    opacity: 1;
+    transform: scale(1);
+    transition: .3s ease-in-out;
     align-items: unset;
     overflow-wrap: break-word;
     box-shadow: .2em .2em .2em ${props => props.theme.colors.shadowColor};
@@ -36,7 +39,7 @@ const ListButtonContainer = styled.div`
 const ListButton = styled(Button)`
     width: 100%;
     margin-bottom: .7rem;
-    transition: .3s ease-in-out;
+    transition: .25s ease-in-out;
     &.buttonDisabled,
     &.buttonDisabled:hover,
     &.buttonDisabled:focus,
@@ -76,7 +79,7 @@ function ToDo(props) {
                 </ListButton>
                 <ListButton
                     type='button'
-                    onClick={() => props.deleteTask(props.task.task_id)}
+                    onClick={(event) => props.deleteTask(event, props.task.task_id)}
                 >
                     DELETE
                 </ListButton>

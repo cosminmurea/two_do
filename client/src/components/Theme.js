@@ -113,19 +113,24 @@ const Button = styled.button`
         top: 0;
         left: 0;
         z-index: -1;
-        width: 130%;
-        height: 110%;
+        width: 100%;
+        height: 100%;
         background-color: ${props => props.theme.colors.borderColor};
-        transform: translate(-110%, 0);
-        transition: .25s ease-out;
+        transform: translate(-100%, 0);
+        transition: .3s ease-out;
+    }
+    &:hover,
+    &:focus {
+        background: ${props => props.theme.colors.borderColor}
     }
     &:hover::before,
     &:focus::before {
-        transform: translate(-5%, 0) skew(-15deg);
+        transform: translate(0%, 0);
     }
 `
 
 const ModalButton = styled(Button)`
+    transition: .3s ease-in-out;
     &:last-of-type {
         margin-bottom: 3.5rem;
     }

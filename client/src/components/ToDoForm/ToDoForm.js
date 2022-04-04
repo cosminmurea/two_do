@@ -8,6 +8,9 @@ import {
 
 const Form = styled.form`
     width: 100%;
+    & > Button {
+        transition: .3s ease-in-out;
+    }
 `
 
 function ToDoForm(props) {

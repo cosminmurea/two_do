@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Slide } from 'react-awesome-reveal'
+import AnimateHeight from 'react-animate-height'
 import ToDo from './ToDo'
 import ModalForm from '../Modal/ModalForm'
 import ModalCard from '../Modal/ModalCard'
@@ -30,6 +31,7 @@ function ToDoList(props) {
     const [openModalFormId, setOpenModalFormId] = useState(null)
     const [openModalCardId, setOpenModalCardId] = useState(null)
     const [description, setDescription] = useState('')
+    const [deleteCard, setDeleteCard] = useState(null)
 
     const openModalCard = (modalCardId) => {
         setOpenModalCardId(modalCardId)
@@ -100,8 +102,23 @@ function ToDoList(props) {
         }
     }
 
-    const deleteTask = async (taskId) => {
+    const promiseTimeout = (seconds) => {
+        return new Promise((resolve) => {
+            setTimeout(resolve, seconds * 1000)
+        })
+    }
+
+    const deleteTask = async (event, taskId) => {
         try {
+            event.preventDefault()
+            const target = event.target.parentNode.parentNode
+            target.style.opacity = 0
+            target.style.transform = 'scale(0)'
+
+            setDeleteCard(taskId)
+
+            await promiseTimeout(0.3)
+
             const fetchOptions = {
                 method: 'DELETE'
             }
@@ -114,16 +131,18 @@ function ToDoList(props) {
         }
     }
 
-    const taskListItems = props.tasks.map(task => (
+    const taskListItems = props.tasks.map((task, arrIndex, tasks) => (
         <React.Fragment key={task.task_id}>
-            <ListItemSlide triggerOnce fraction={.1} direction={task.task_id % 2 === 0 ? 'right' : 'left'}>
-                <ToDo
-                    task={task}
-                    updateTaskStatus={updateTaskStatus}
-                    openModalForm={openModalForm}
-                    openModalCard={openModalCard}
-                    deleteTask={deleteTask}
-                />
+            <ListItemSlide triggerOnce fraction={0.1} direction={arrIndex % 2 === 0 ? 'right' : 'left'}>
+                <AnimateHeight duration={arrIndex === tasks.length - 1 ? 300 : 3000} height={deleteCard === task.task_id ? 0 : 'auto'}>
+                    <ToDo
+                        task={task}
+                        updateTaskStatus={updateTaskStatus}
+                        openModalForm={openModalForm}
+                        openModalCard={openModalCard}
+                        deleteTask={deleteTask}
+                    />
+                </AnimateHeight>
             </ListItemSlide>
             <ModalCard
                 openModalId={openModalCardId}
