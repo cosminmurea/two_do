@@ -30,7 +30,7 @@ const ListItemSlide = styled(Slide)`
 function ToDoList(props) {
     const [openModalFormId, setOpenModalFormId] = useState(null)
     const [openModalCardId, setOpenModalCardId] = useState(null)
-    const [deleteCard, setDeleteCard] = useState(null)
+    const [deleteCardId, setDeleteCardId] = useState(null)
 
     const openModalCard = (modalCardId) => {
         setOpenModalCardId(modalCardId)
@@ -73,7 +73,7 @@ function ToDoList(props) {
             target.style.opacity = 0
             target.style.transform = 'scale(0)'
 
-            setDeleteCard(taskId)
+            setDeleteCardId(taskId)
 
             await promiseTimeout(0.3)
 
@@ -92,7 +92,7 @@ function ToDoList(props) {
     const taskListItems = props.tasks.map((task, arrIndex, tasks) => (
         <React.Fragment key={task.task_id}>
             <ListItemSlide triggerOnce fraction={0.1} direction={arrIndex % 2 === 0 ? 'right' : 'left'}>
-                <AnimateHeight duration={arrIndex === tasks.length - 1 ? 300 : 3000} height={deleteCard === task.task_id ? 0 : 'auto'}>
+                <AnimateHeight duration={arrIndex === tasks.length - 1 ? 300 : 3000} height={deleteCardId === task.task_id ? 0 : 'auto'}>
                     <ToDo
                         task={task}
                         updateTaskStatus={updateTaskStatus}
@@ -120,7 +120,7 @@ function ToDoList(props) {
     return (
         <ListContainer>
             <ListHeader>
-                {props.tasks.length} Tasks Total
+                {`${props.tasks.length} Tasks`}
             </ListHeader>
             {taskListItems}
         </ListContainer>

@@ -23,7 +23,9 @@ const theme = {
 Global styles, applied to the entire application;
 */
 const GlobalStyles = createGlobalStyle`
-    * {
+    *,
+    *::before,
+    *::after {
         box-sizing: border-box;
         font-family: Arvo, serif;
         text-decoration: none;
@@ -34,7 +36,7 @@ const GlobalStyles = createGlobalStyle`
     html {
         scroll-behavior: smooth;
     }
-    html::-webkit-scrollbar {
+    ::-webkit-scrollbar {
         display: none;
     }
     body {
