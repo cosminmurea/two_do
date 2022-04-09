@@ -6,6 +6,7 @@ import {
     Button
 } from '../Theme'
 import useInput from '../../hooks/useInput'
+import { createNewTask } from '../../services/tasksService'
 
 const Form = styled.form`
     width: 100%;
@@ -17,46 +18,21 @@ const Form = styled.form`
 function ToDoForm(props) {
     const taskDescription = useInput('')
 
-    const createTask = async (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault()
 
-        if (taskDescription.value.trim().length === 0) {
-            alert('All Fields are Required!!')
-            return
-        }
-
         try {
-            await postRequest(`/tasks`, taskDescription.value.trim())
-
-            props.updateData()
-
+            const createTask = await createNewTask(taskDescription.value)
+            createTask && props.updateData()
             taskDescription.reset()
         } catch (error) {
-            console.error(error.message)
-        }
-    }
-
-    const postRequest = async (url, description) => {
-        try {
-            const postOptions = {
-                method: 'POST',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({ description: description })
-            }
-            const response = await fetch(url, postOptions)
-            const responseData = await response.json()
-            return responseData
-        } catch (error) {
-            console.error(error.message)
-            return undefined
+            console.error(error)
         }
     }
 
     return (
         <Form
-            onSubmit={createTask}
+            onSubmit={handleSubmit}
         >
             <Label
                 htmlFor='toDoDescription'

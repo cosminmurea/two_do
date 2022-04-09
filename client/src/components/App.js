@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import ToDoForm from './ToDoForm/ToDoForm'
 import ToDoList from './ToDoList/ToDoList'
@@ -9,7 +9,8 @@ import {
     Header,
     Label
 } from './Theme'
-import useFetch from '../hooks/useFetch'
+
+import { getTasks } from '../services/tasksService'
 
 const AppContainer = styled.div`
     ${FlexContainer}
@@ -37,27 +38,15 @@ const SeparatorSpan = styled.span`
 `
 
 function App() {
-    // const [tasks, setTasks] = useState([])
+    const [tasks, setTasks] = useState([])
 
-    // const getTasks = async () => {
-    //     try {
-    //         const response = await fetch('/tasks')
-    //         const jsonData = await response.json()
-    //         setTasks(jsonData)
-    //     } catch (error) {
-    //         console.error(error.message)
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     getTasks()
-    // }, [])
-
-    const fetchTasks = useFetch('/tasks')
+    const fetchTasks = async () => {
+        const newTasks = await getTasks()
+        setTasks(newTasks)
+    }
 
     useEffect(() => {
-        fetchTasks.get()
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        fetchTasks()
     }, [])
 
     return (
@@ -66,16 +55,12 @@ function App() {
                 <MainHeader>twoDo</MainHeader>
                 <SubHeader>Stay Organized!</SubHeader>
                 <SeparatorSpan></SeparatorSpan>
-                <ToDoForm updateData={fetchTasks.get} />
+                <ToDoForm updateData={fetchTasks} />
                 <SeparatorSpan></SeparatorSpan>
-                {fetchTasks.data &&
-                    <ToDoList
-                        tasks={fetchTasks.data}
-                        error={fetchTasks.error}
-                        loading={fetchTasks.loading}
-                        updateData={fetchTasks.get}
-                    />
-                }
+                <ToDoList
+                    tasks={tasks}
+                    updateData={fetchTasks}
+                />
             </AppContainer>
             <Footer />
         </Theme>
