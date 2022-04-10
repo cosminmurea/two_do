@@ -43,6 +43,60 @@ const createNewTask = async (taskDescription) => {
         return null
     }
 }
+const updateTaskDescription = async (taskId, newDescription) => {
+    const updatedDescription = validateParseDescription(newDescription)
+    if (updatedDescription) {
+        try {
+            const fetchOptions = {
+                method: 'PUT',
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({ description: updatedDescription })
+            }
+            const response = await fetch(`/tasks/${taskId}`, fetchOptions)
+            handleErrors(response)
+            const jsonData = await response.json()
+            return jsonData
+        } catch (error) {
+            console.error(error)
+        }
+    } else {
+        return null
+    }
+}
+
+const updateTaskStatus = async (taskId, taskStatus) => {
+    try {
+        const fetchOptions = {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({ taskStatus: !taskStatus })
+        }
+        const response = await fetch(`/tasks/status/${taskId}`, fetchOptions)
+        handleErrors(response)
+        const jsonData = await response.json()
+        return jsonData
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+const deleteTaskById = async (taskId) => {
+    try {
+        const fetchOptions = {
+            method: 'DELETE'
+        }
+        const response = await fetch(`/tasks/${taskId}`, fetchOptions)
+        handleErrors(response)
+        const jsonData = await response.json()
+        return jsonData
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 /*
 Error Handler;
@@ -70,9 +124,21 @@ const validateParseDescription = (taskDescription) => {
     return taskDescription.trim()
 }
 
+/*
+Basic async setTimeout() => can be used with the await keyword
+*/
+const promiseTimeout = (seconds) => {
+    return new Promise((resolve) => {
+        setTimeout(resolve, seconds * 1000)
+    })
+}
 
 export {
     getTasks,
     getTaskById,
-    createNewTask
+    createNewTask,
+    updateTaskDescription,
+    updateTaskStatus,
+    deleteTaskById,
+    promiseTimeout
 }

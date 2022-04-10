@@ -59,7 +59,7 @@ const updateTaskStatusById = async (request, response) => {
     try {
         const updateStatusQuery = 'UPDATE tasks SET is_completed = $1 WHERE task_id = $2;'
         const taskId = request.params.id
-        const taskStatus = !request.body.taskStatus
+        const taskStatus = request.body.taskStatus
         const updateStatusParams = [taskStatus, taskId]
         const updateTaskStatus = await pool.query(updateStatusQuery, updateStatusParams)
         response.json(`Task Marked as ${taskStatus ? 'Complete' : 'Incomplete'}!`)

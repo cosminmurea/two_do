@@ -9,6 +9,11 @@ import {
     FlexContainer,
     Label
 } from '../Theme'
+import {
+    updateTaskStatus,
+    deleteTaskById,
+    promiseTimeout
+} from '../../services/tasksService'
 
 const ListContainer = styled.ul`
     ${FlexContainer}
@@ -42,28 +47,14 @@ function ToDoList(props) {
         document.body.style.overflow = 'hidden'
     }
 
-    const updateTaskStatus = async (taskId, taskStatus) => {
+    const toggleTaskStatus = async (taskId, taskStatus) => {
         try {
-            const fetchOptions = {
-                method: 'PUT',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({ taskStatus: taskStatus })
-            }
-            const response = await fetch(`/tasks/status/${taskId}`, fetchOptions)
-            const jsonData = await response.json()
-            console.log(jsonData)
+            const updatedTask = await updateTaskStatus(taskId, taskStatus)
             props.updateData()
+            console.log(updatedTask)
         } catch (error) {
             console.error(error.message)
         }
-    }
-
-    const promiseTimeout = (seconds) => {
-        return new Promise((resolve) => {
-            setTimeout(resolve, seconds * 1000)
-        })
     }
 
     const deleteTask = async (event, taskId) => {
@@ -72,18 +63,11 @@ function ToDoList(props) {
             const target = event.target.parentNode.parentNode
             target.style.opacity = 0
             target.style.transform = 'scale(0)'
-
             setDeleteCardId(taskId)
-
             await promiseTimeout(0.3)
-
-            const fetchOptions = {
-                method: 'DELETE'
-            }
-            const response = await fetch(`/tasks/${taskId}`, fetchOptions)
-            const jsonData = await response.json()
-            console.log(jsonData)
+            const deletedTask = await deleteTaskById(taskId)
             props.updateData()
+            console.log(deletedTask)
         } catch (error) {
             console.error(error.message)
         }
@@ -95,7 +79,7 @@ function ToDoList(props) {
                 <AnimateHeight duration={arrIndex === tasks.length - 1 ? 300 : 3000} height={deleteCardId === task.task_id ? 0 : 'auto'}>
                     <ToDo
                         task={task}
-                        updateTaskStatus={updateTaskStatus}
+                        updateTaskStatus={toggleTaskStatus}
                         openModalForm={openModalForm}
                         openModalCard={openModalCard}
                         deleteTask={deleteTask}

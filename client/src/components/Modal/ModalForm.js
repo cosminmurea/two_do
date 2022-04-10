@@ -1,8 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import Modal from './Modal'
-import { Label, Input, ModalButton } from '../Theme'
+import {
+    Label,
+    Input,
+    ModalButton
+} from '../Theme'
 import useInput from '../../hooks/useInput'
+import { updateTaskDescription } from '../../services/tasksService'
 
 const ModalLabel = styled(Label)`
     margin-top: 3.5rem;
@@ -12,40 +17,17 @@ const ModalLabel = styled(Label)`
 function ModalForm(props) {
     const taskDescription = useInput('')
 
-    const updateTask = async (event, taskId) => {
+    const handleSubmit = async (event, taskId) => {
         event.preventDefault()
 
-        if (taskDescription.value.trim().length === 0) {
-            alert('All Fields are Required!!')
-            return
-        }
-
         try {
-            await putRequest(`/tasks/${taskId}`, taskDescription.value.trim())
-
-            props.updateData()
-
-            closeModal()
-        } catch (error) {
-            console.error(error.message)
-        }
-    }
-
-    const putRequest = async (url, description) => {
-        try {
-            const putOptions = {
-                method: 'PUT',
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({ description: description })
+            const updatedTask = await updateTaskDescription(taskId, taskDescription.value)
+            if (updatedTask) {
+                props.updateData()
+                closeModal()
             }
-            const response = await fetch(url, putOptions)
-            const responseData = await response.json()
-            return responseData
         } catch (error) {
             console.error(error.message)
-            return undefined
         }
     }
 
@@ -60,7 +42,7 @@ function ModalForm(props) {
             show={props.openModalId === props.task.task_id}
         >
             <form
-                onSubmit={(event) => updateTask(event, props.task.task_id)}
+                onSubmit={(event) => handleSubmit(event, props.task.task_id)}
             >
                 <ModalLabel
                     modal
