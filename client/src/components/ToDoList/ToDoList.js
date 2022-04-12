@@ -13,7 +13,7 @@ import {
     updateTaskStatus,
     deleteTaskById,
     promiseTimeout
-} from '../../services/tasksService'
+} from '../../services/tasksServices'
 
 const ListContainer = styled.ul`
     ${FlexContainer}

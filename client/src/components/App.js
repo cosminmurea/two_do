@@ -2,30 +2,8 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import ToDoForm from './ToDoForm/ToDoForm'
 import ToDoList from './ToDoList/ToDoList'
-import Footer from './Footer'
-import {
-    Theme,
-    FlexContainer,
-    Header,
-    Label
-} from './Theme'
 
-import { getTasks } from '../services/tasksService'
-
-const AppContainer = styled.div`
-    ${FlexContainer}
-    max-width: 800px;
-`
-
-const MainHeader = styled(Header)`
-    color: ${props => props.theme.colors.textPrimary};
-    margin-top: 2.5rem;
-    margin-bottom: .5rem;
-`
-
-const SubHeader = styled(Label)`
-    margin-bottom: 2.5rem;
-`
+import { getTasks } from '../services/tasksServices'
 
 const SeparatorSpan = styled.span`
     display: block;
@@ -50,20 +28,15 @@ function App() {
     }, [])
 
     return (
-        <Theme>
-            <AppContainer>
-                <MainHeader>twoDo</MainHeader>
-                <SubHeader>Stay Organized!</SubHeader>
-                <SeparatorSpan></SeparatorSpan>
-                <ToDoForm updateData={fetchTasks} />
-                <SeparatorSpan></SeparatorSpan>
-                <ToDoList
-                    tasks={tasks}
-                    updateData={fetchTasks}
-                />
-            </AppContainer>
-            <Footer />
-        </Theme>
+        <React.Fragment>
+            <SeparatorSpan></SeparatorSpan>
+            <ToDoForm updateData={fetchTasks} />
+            <SeparatorSpan></SeparatorSpan>
+            <ToDoList
+                tasks={tasks}
+                updateData={fetchTasks}
+            />
+        </React.Fragment>
     )
 }
 

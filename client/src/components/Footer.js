@@ -7,12 +7,12 @@ import {
     FaGithub,
     FaYoutube
 } from 'react-icons/fa'
-import landingBackground from '../assets/landing_bg.jpg'
 import {
     FlexContainer,
     Label,
     SocialMediaIcons
 } from './Theme'
+import landingBackground from '../assets/landing_bg.jpg'
 
 const FooterContainer = styled.div`
     ${FlexContainer}

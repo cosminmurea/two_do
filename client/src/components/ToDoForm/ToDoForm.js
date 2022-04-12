@@ -6,7 +6,7 @@ import {
     Button
 } from '../Theme'
 import useInput from '../../hooks/useInput'
-import { createNewTask } from '../../services/tasksService'
+import { createNewTask } from '../../services/tasksServices'
 
 const Form = styled.form`
     width: 100%;

@@ -7,7 +7,7 @@ import {
     ModalButton
 } from '../Theme'
 import useInput from '../../hooks/useInput'
-import { updateTaskDescription } from '../../services/tasksService'
+import { updateTaskDescription } from '../../services/tasksServices'
 
 const ModalLabel = styled(Label)`
     margin-top: 3.5rem;
