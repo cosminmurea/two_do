@@ -2,8 +2,22 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import ToDoForm from './ToDoForm/ToDoForm'
 import ToDoList from './ToDoList/ToDoList'
+import {
+    Header,
+    Label
+} from '../components/Theme'
 
 import { getTasks } from '../services/tasksServices'
+
+const MainHeader = styled(Header)`
+    color: ${props => props.theme.colors.textPrimary};
+    margin-top: 5rem;
+    margin-bottom: .5rem;
+`
+
+const SubHeader = styled(Label)`
+    margin-bottom: 2.5rem;
+`
 
 const SeparatorSpan = styled.span`
     display: block;
@@ -29,6 +43,8 @@ function App() {
 
     return (
         <React.Fragment>
+            <MainHeader>twoDo</MainHeader>
+            <SubHeader>Stay Organized!</SubHeader>
             <SeparatorSpan></SeparatorSpan>
             <ToDoForm updateData={fetchTasks} />
             <SeparatorSpan></SeparatorSpan>
